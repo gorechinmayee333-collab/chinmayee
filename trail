@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  :root {--netflix-red:#E50914;--dark-bg:#141414;--light-text:#E5E7EB;}
+  body{font-family:'Inter',sans-serif;background-color:var(--dark-bg);color:white;}
+  .scroll-row::-webkit-scrollbar{display:none;} .scroll-row{-ms-overflow-style:none;scrollbar-width:none;}
+  .featured-banner{background-image:linear-gradient(to right,rgba(20,20,20,1) 10%,rgba(20,20,20,0.2) 60%,rgba(20,20,20,1) 100%),url(
+  
+  );background-size:cover;background-position:center;}
+  .card-item{transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;width:280px;min-height:250px;}
+  .card-item:hover{transform:scale(1.1);box-shadow:0 0 15px rgba(229,9,20,.8);z-index:5;}
+  .logo-header-container{position:relative;height:128px;}
+  .logo-header-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:white;opacity:.8;}
+  .utility-card{background-color:#2A2A2A;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23333333' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40zm-40 80h40v40H0V80zm40-40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");background-size:40px 40px;border:1px solid rgba(255,255,255,0.1);}
+  .loading-spinner{border:4px solid rgba(255,255,255,.3);border-top:4px solid var(--netflix-red);border-radius:50%;width:24px;height:24px;animation:spin 1s linear infinite;}
+  @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  </style>
+  </head>
+  <body class="min-h-screen antialiased">
+  <!-- NEW HEADER -->
+  <header class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
+  <nav class="flex items-center justify-between px-6 py-4">
+  <h1 class="text-2xl font-bold text-red-600 tracking-tight">PORTFOLIO</h1>
+  <ul class="hidden md:flex space-x-6 text-lg">
+  <li><a href="#featured" class="hover:text-red-500">Home</a></li>
+  <li><a href="#featured" class="hover:text-red-500">About Me</a></li>
+  <li><a href="#experience" class="hover:text-red-500">Experience</a></li>
+  <li><a href="#experience" class="hover:text-red-500">Key Skills</a></li>
+  <li><a href="#experience" class="hover:text-red-500">Certifications</a></li>
+  <li><a href="#mailer" class="hover:text-red-500">Contact</a></li>
+  </ul>
+  <button onclick="toggleMenu()" class="md:hidden text-white">
+  <i data-lucide="menu" class="w-7 h-7"></i>
+  </button>
+  </nav>
+  <div id="mobileMenu" class="hidden bg-black/90 p-6 absolute w-full border-t border-white/10 md:hidden">
+  <ul class="flex flex-col space-y-4 text-lg">
+  <li><a href="#featured" onclick="toggleMenu()" class="hover:text-red-500">Home</a></li>
+  <li><a href="#featured" onclick="toggleMenu()" class="hover:text-red-500">About Me</a></li>
+  <li><a href="#experience" onclick="toggleMenu()" class="hover:text-red-500">Experience</a></li>
+  <li><a href="#experience" onclick="toggleMenu()" class="hover:text-red-500">Key Skills</a></li>
+  <li><a href="#experience" onclick="toggleMenu()" class="hover:text-red-500">Certifications</a></li>
+  <li><a href="#mailer" onclick="toggleMenu()" class="hover:text-red-500">Contact</a></li>
+  </ul>
+  </div>
+  </header>
+  <script>
+  function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("hidden");}
+  </script>
+  <!-- HERO SECTION -->
+  <section
+  id="featured"
+  class="featured-banner pt-40 md:pt-48 h-[70vh] md:h-[90vh] flex items-center"
+  style="
+    background-image: url('https://iili.io/fR2Ym92.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  "
+>
+  <div class="container mx-auto px-4 md:px-12 md:max-w-xl">
+    <h1 class="text-5xl font-extrabold mb-4 drop-shadow-lg leading-tight">
+      Chinmayee Gore
+    </h1>
+    <p
+      class="text-xl text-[--light-text] mb-6 drop-shadow-md"
+      id="executive-pitch-output"
+    >
+      <div class="text-xl font-medium text-[--light-text] mb-6">
+        <strong>In Short:</strong>
+        <ul class="space-y-1 mt-2">
+          <li>👋 Skilled at keeping SaaS customers happy.</li>
+          <li>🧑‍🏫 Can explain complex ideas clearly.</li>
+          <li>🎯 Leadership experience since college.</li>
+        </ul>
+      </div>
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <button
+        id="email"
+        class="px-8 py-3 bg-[--netflix-red] rounded-lg font-bold flex items-center hover:bg-red-700"
+      >
+        <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>✨ Contact Me
+      </button>
+      <a
+        href="#experience"
+        class="px-8 py-3 bg-gray-600/70 rounded-lg font-bold flex items-center hover:bg-gray-500"
+      >
+        <i data-lucide="play" class="w-5 h-5 mr-2"></i>View Experience
+      </a>
+    </div>
+    <div
+      id="pitch-loading-indicator"
+      class="hidden mt-4 flex items-center text-sm text-gray-400"
+    >
+      <div class="loading-spinner mr-2"></div>
+      Generating pitch...
+    </div>
+  </div>
+</section>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-16">
+  <div class="container mx-auto px-4 md:px-12">
+  <h2 class="text-4xl font-extrabold mb-8">Professional Journey</h2>
+  <h3 class="text-2xl font-bold mb-4">Work Experience</h3>
+  <div class="scroll-row flex overflow-x-scroll space-x-6 pb-4">
+  <!-- MoEngage -->
+  <div class="card-item bg-[#222] rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+  <div class="logo-header-container">
+  <img src="https://iili.io/fRKkvYx.png" class="w-full h-32 object-cover" />
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Assoc. Customer Success Manager</h4>
+  <p class="text-sm text-gray-300">MoEngage</p>
+  <p class="text-xs text-gray-500">Aug 2024 – Present</p>
+  <p class="text-xs text-gray-400 mt-3">Handled onboarding, retention & ACV expansion.</p>
+  </div>
+  </div>
+  <!-- IMS -->
+  <div class="card-item bg-[#222] rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+  <div class="logo-header-container">
+  <img src="https://iili.io/fRK8jUb.png" class="w-full h-32 object-cover" />
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Education Consultant</h4>
+  <p class="text-sm text-gray-300">IMS International</p>
+  <p class="text-xs text-gray-500">May – Jul 2024</p>
+  <p class="text-xs text-gray-400 mt-3">Guided 50+ students, SOPs, interview prep & visas.</p>
+  </div>
+  </div>
+  </div>
+  <!-- INTERNSHIPS -->
+  <h3 class="text-2xl font-bold mt-12 mb-4">Internships & Live Projects</h3>
+  <div class="scroll-row flex overflow-x-scroll space-x-6 pb-4">
+  <!-- GH -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/004085/FFFFFF?text=GH" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">GH</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Product Management Intern</h4>
+  <p class="text-sm text-gray-300">Growth Hackers</p>
+  <p class="text-xs text-gray-500">Feb – Mar 2022</p>
+  <p class="text-xs text-gray-400 mt-3">Launch strategy, segmentation, affiliate model.</p>
+  </div>
+  </div>
+  <!-- PTE -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/800080/FFFFFF?text=PTE" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">PTE</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Social Media Assoc.</h4>
+  <p class="text-sm text-gray-300">PTE University</p>
+  <p class="text-xs text-gray-500">Aug – Oct 2022</p>
+  <p class="text-xs text-gray-400 mt-3">Content strategy & visibility boost.</p>
+  </div>
+  </div>
+  <!-- GGI -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/F08000/FFFFFF?text=GGI" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">GGI</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Digital Marketing Intern</h4>
+  <p class="text-sm text-gray-300">Geeta Group</p>
+  <p class="text-xs text-gray-500">Aug – Oct 2022</p>
+  <p class="text-xs text-gray-400 mt-3">SEO + SMM + Sales goal achieved early.</p>
+  </div>
+  </div>
+  <!-- Unschool -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/50C878/FFFFFF?text=US" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">US</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Growth Manager</h4>
+  <p class="text-sm text-gray-300">Unschool</p>
+  <p class="text-xs text-gray-500">Feb – Mar 2022</p>
+  <p class="text-xs text-gray-400 mt-3">Top performer among 100+ interns.</p>
+  </div>
+  </div>
+  <!-- Safe City -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/FF6347/FFFFFF?text=SC" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">SC</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Volunteer (Safe City)</h4>
+  <p class="text-sm text-gray-300">Live Project</p>
+  <p class="text-xs text-gray-500">May – Jun 2022</p>
+  <p class="text-xs text-gray-400 mt-3">Enabled 50+ case reports w/ police.</p>
+  </div>
+  </div>
+  <!-- Piramal -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/3F51B5/FFFFFF?text=PF" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">PF</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Volunteer & Coach</h4>
+  <p class="text-sm text-gray-300">Piramal Foundation</p>
+  <p class="text-xs text-gray-500">Jun – Jul 2022</p>
+  <p class="text-xs text-gray-400 mt-3">Science-based education support.</p>
+  </div>
+  </div>
+  <!-- Cur8 -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/FF9800/FFFFFF?text=C8" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">C8</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Community Influencer</h4>
+  <p class="text-sm text-gray-300">Cur8</p>
+  <p class="text-xs text-gray-500">Apr – May 2023</p>
+  <p class="text-xs text-gray-400 mt-3">Content creation & query resolution.</p>
+  </div>
+  </div>
+  </div>
+  <!-- EDUCATION -->
+  <h3 class="text-2xl font-bold mt-12 mb-4">Academic Credentials</h3>
+  <div class="scroll-row flex overflow-x-scroll space-x-6 pb-4">
+  <!-- MBA -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/8F2248/FFFFFF?text=MBA" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">MBA</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">MBA (Marketing Analytics)</h4>
+  <p class="text-sm text-gray-300">NMIMS Hyderabad</p>
+  <p class="text-xs text-gray-500">2022–2024</p>
+  <p class="text-xs text-gray-400 mt-3">Ops Club Co-head.</p>
+  </div>
+  </div>
+  <!-- MCom -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/000080/FFFFFF?text=MCom" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">MCom</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Master of Commerce</h4>
+  <p class="text-sm text-gray-300">Mumbai University</p>
+  <p class="text-xs text-gray-500">Year TBD</p>
+  <p class="text-xs text-gray-400 mt-3">Post-grad in Commerce.</p>
+  </div>
+  </div>
+  <!-- BMS -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/1C4E80/FFFFFF?text=BMS" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">BMS</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">Bachelor of Management Studies</h4>
+  <p class="text-sm text-gray-300">Saraf College</p>
+  <p class="text-xs text-gray-500">2017–2020</p>
+  <p class="text-xs text-gray-400 mt-3">Student Council, DLLE drives.</p>
+  </div>
+  </div>
+  <!-- HSC SSC -->
+  <div class="card-item bg-[#222] rounded-xl flex-shrink-0 overflow-hidden">
+  <div class="logo-header-container">
+  <img src="https://placehold.co/280x128/000000/FFFFFF?text=School" class="w-full h-32 object-cover" />
+  <div class="logo-header-overlay">HS/SS</div>
+  </div>
+  <div class="p-4">
+  <h4 class="font-bold text-lg">High School</h4>
+  <p class="text-sm text-gray-300">DS College / SR Vidyalaya</p>
+  <p class="text-xs text-gray-500">2015 & 2017</p>
+  <p class="text-xs text-gray-400 mt-3">Business foundation.</p>
+  </div>
+  </div>
+  </div>
+  <!-- CERTIFICATIONS -->
+  <h3 class="text-2xl font-bold mt-12 mb-4">Certifications</h3>
+  <div class="scroll-row flex overflow-x-scroll space-x-6 pb-4">
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4">
+  <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+  <h4 class="font-bold text-lg">Six Sigma – Green Belt</h4>
+  <p class="text-sm text-gray-300">KPMG</p>
+  <p class="text-xs text-gray-400 mt-2">DMAIC expert.</p>
+  </div>
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4">
+  <i data-lucide="brain" class="w-8 h-8 mb-2"></i>
+  <h4 class="font-bold text-lg">Consumer Neuromarketing</h4>
+  <p class="text-sm text-gray-300">CBS</p>
+  <p class="text-xs text-gray-400 mt-2">Customer psychology.</p>
+  </div>
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4">
+  <i data-lucide="bar-chart-3" class="w-8 h-8 mb-2"></i>
+  <h4 class="font-bold text-lg">Analytics & Visualization</h4>
+  <p class="text-sm text-gray-300">Accenture</p>
+  <p class="text-xs text-gray-400 mt-2">Data storytelling.</p>
+  </div>
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4">
+  <i data-lucide="megaphone" class="w-8 h-8 mb-2"></i>
+  <h4 class="font-bold text-lg">Marketing Concepts</h4>
+  <p class="text-sm text-gray-300">Bloomberg</p>
+  <p class="text-xs text-gray-400 mt-2">Messaging & funnels.</p>
+  </div>
+  </div>
+  <!-- SKILLS -->
+  <h3 class="text-2xl font-bold mt-12 mb-4">Core Skills</h3>
+  <div class="scroll-row flex overflow-x-scroll space-x-6 pb-4">
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4 text-center">
+  <i data-lucide="users-check" class="w-10 h-10 mb-2"></i>
+  <h4 class="font-bold text-lg">Customer Success</h4>
+  <p class="text-sm text-gray-400 mt-2">Retention, onboarding, upsell.</p>
+  </div>
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4 text-center">
+  <i data-lucide="smartphone" class="w-10 h-10 mb-2"></i>
+  <h4 class="font-bold text-lg">Mobile Automation</h4>
+  <p class="text-sm text-gray-400 mt-2">Journeys, MoEngage.</p>
+  </div>
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4 text-center">
+  <i data-lucide="bar-chart-2" class="w-10 h-10 mb-2"></i>
+  <h4 class="font-bold text-lg">Data Strategy</h4>
+  <p class="text-sm text-gray-400 mt-2">Churn, A/B tests.</p>
+  </div>
+  <div class="card-item utility-card rounded-xl flex-shrink-0 p-4 text-center">
+  <i data-lucide="sigma" class="w-10 h-10 mb-2"></i>
+  <h4 class="font-bold text-lg">Product & Agile</h4>
+  <p class="text-sm text-gray-400 mt-2">Scrum, UX, GTM.</p>
+  </div>
+  </div>
+  </div>
+  </section>
+  <!-- MAILER -->
+  <section id="mailer" class="py-16 bg-gray-900">
+  <div class="container mx-auto px-4 md:px-12 max-w-2xl text-center">
+  <h2 class="text-3xl font-bold text-[--netflix-red] mb-4">Join My Mailing List</h2>
+  <p class="text-gray-300 mb-6">Please reach out to know more.</p>
+  <div class="bg-[#222] p-6 rounded-xl shadow-xl">
+  <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank" class="flex flex-col sm:flex-row gap-3">
+  <input type="email" name="entry.123456789" placeholder="Enter your email" required class="flex-grow p-3 rounded-lg bg-gray-800 border border-gray-700 text-white" />
+  <button class="px-6 py-3 bg-[--netflix-red] text-white font-bold rounded-lg hover:bg-red-700">Subscribe</button>
+  </form>
+  <p class="text-xs text-gray-500 mt-3">A new tab will open for confirmation.</p>
+  </div>
+  </div>
+  </section>
+  <!-- FOOTER -->
+  <footer class="py-10 border-t border-gray-800 bg-gray-900">
+  <div class="container mx-auto px-4 md:px-12 grid md:grid-cols-3 gap-8">
+  <div>
+  <h4 class="text-lg font-semibold mb-3 text-white">About</h4>
+  <p class="text-sm text-gray-400">Chinmayee Gore: +918291109930
+  </p>
+  </div>
+  <div>
+  <h4 class="text-lg font-semibold mb-3 text-white">Links</h4>
+  <ul class="space-y-2 text-sm text-gray-400">
+  <li><a href="mailto:gorechinmayee333@gmail.com" class="hover:text-red-500">Email</a></li>
+  <li><a href="https://linkedin.com/in/gorechinmayee" target="_blank" class="hover:text-red-500">LinkedIn</a></li>
+  </ul>
+  </div>
+  <div>
+  <h4 class="text-lg font-semibold mb-3 text-white flex items-center"><i data-lucide="mail-open" class="w-5 h-5 mr-2 text-red-500"></i>Email Draft</h4>
+  <textarea id="email-draft-input" rows="3" class="w-full p-2 bg-gray-800 border border-gray-700 text-white rounded-lg" placeholder="Write what email you need drafted..."></textarea>
+  <button id="draft-email-button" class="w-full mt-3 px-4 py-2 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600">Draft Email</button>
+  <p id="email-draft-output" class="text-sm text-gray-300 mt-3 bg-gray-800 p-3 rounded-lg hidden"></p>
+  </div>
+  </div>
+  <div class="text-center text-sm text-gray-600 pt-8 mt-8 border-t border-gray-800">
+  &copy; 2025 CG Portfolio. All Rights Reserved.
+  </div>
+  </footer>
+  };
+  </script>
+  </body></html>
